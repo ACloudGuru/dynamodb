@@ -1,7 +1,7 @@
 <?php
 //Code is provided by AWS and available here; http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/AppendixSampleDataCodePHP.html
 
-require 'vendor/autoload.php';
+require '/var/www/html/vendor/autoload.php';
 use Aws\DynamoDb\DynamoDbClient;
 
 $client = DynamoDbClient::factory(array(
