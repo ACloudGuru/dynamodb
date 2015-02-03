@@ -1,6 +1,6 @@
 <?php
 
-require 'vendor/autoload.php';
+require '/var/www/html/vendor/autoload.php';
 use Aws\DynamoDb\DynamoDbClient;
 
 $client = DynamoDbClient::factory(array(
