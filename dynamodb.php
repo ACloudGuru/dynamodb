@@ -1,11 +1,7 @@
 <?php
-
+require 'vendor/autoload.php';
 use Aws\DynamoDb\DynamoDbClient;
-
-$client = DynamoDbClient::factory(array(
-    'profile' => 'default',
-    'region' => 'us-west-2'  // replace with your desired region
-));
+$client = S3Client::factory();
 
 # Setup some local variables for dates
 
