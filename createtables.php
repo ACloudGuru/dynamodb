@@ -5,7 +5,8 @@ require '/var/www/html/vendor/autoload.php';
 use Aws\DynamoDb\DynamoDbClient;
 
 $client = DynamoDbClient::factory(array(
-    'region' => 'eu-west-1'  // replace with your desired region
+    'region' => 'eu-west-1',  // replace with your desired region
+    'version' => '2012-08-10'
 ));
 
 $tableNames = array();
