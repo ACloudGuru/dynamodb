@@ -158,3 +158,4 @@
         $client->waitUntil('TableExists', array('TableName' => $tableName)); // Changed from v2
         echo "Table $tableName has been created." . PHP_EOL;
     }
+
