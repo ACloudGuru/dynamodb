@@ -1,39 +1,40 @@
 <?php
-    //Code is provided by AWS and available here; http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/AppendixSampleDataCodePHP.html
-    
+    // Load common stuff
+    require_once('common.php');
+
+    // Code is provided by AWS and available here;
+    // http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/AppendixSampleDataCodePHP.html
+
     // Date now needs to be set, which I guess is a good thing!
     date_default_timezone_set('Europe/London');
-    
+
     // Find out what the issues are:
     ini_set('display_errors',1);
     ini_set('display_startup_errors',1);
     error_reporting(-1);
-    
+
     require '/var/www/html/vendor/autoload.php';
     use Aws\DynamoDb\DynamoDbClient;
-    
-    $client = DynamoDbClient::factory(array(
-        'region' => 'eu-west-1',  // replace with your desired region visit http://docs.aws.amazon.com/general/latest/gr/rande.html to get your regions.
-        'version' => '2012-08-10' // Now needs a version
-    ));
-    
+
+    $client = DynamoDbClient::factory($config);
+
     $tableNames = array();
-    
+
     $tableName = 'ProductCatalog';
-    echo "Creating table $tableName..." . PHP_EOL;
-    
+    echo "Creating table $tableName..." . HTML_EOL;
+
     $response = $client->createTable(array(
         'TableName' => $tableName,
         'AttributeDefinitions' => array(
             array(
                 'AttributeName' => 'Id',
-                'AttributeType' => 'N' 
+                'AttributeType' => 'N'
             )
         ),
         'KeySchema' => array(
             array(
                 'AttributeName' => 'Id',
-                'KeyType' => 'HASH' 
+                'KeyType' => 'HASH'
             )
         ),
         'ProvisionedThroughput' => array(
@@ -42,16 +43,16 @@
         )
     ));
     $tableNames[] = $tableName;
-    
+
     $tableName = 'Forum';
-    echo "Creating table $tableName..." . PHP_EOL;
-    
+    echo "Creating table $tableName..." . HTML_EOL;
+
     $response = $client->createTable(array(
         'TableName' => $tableName,
         'AttributeDefinitions' => array(
             array(
                 'AttributeName' => 'Name',
-                'AttributeType' => 'S' 
+                'AttributeType' => 'S'
             )
         ),
         'KeySchema' => array(
@@ -66,10 +67,10 @@
         )
     ));
     $tableNames[] = $tableName;
-    
+
     $tableName = 'Thread';
-    echo "Creating table $tableName..." . PHP_EOL;
-    
+    echo "Creating table $tableName..." . HTML_EOL;
+
     $response = $client->createTable(array(
         'TableName' => $tableName,
         'AttributeDefinitions' => array(
@@ -98,24 +99,24 @@
         )
     ));
     $tableNames[] = $tableName;
-    
+
     $tableName = 'Reply';
-    echo "Creating table $tableName..." . PHP_EOL;
-    
+    echo "Creating table $tableName..." . HTML_EOL;
+
     $response = $client->createTable(array(
         'TableName' => $tableName,
         'AttributeDefinitions' => array(
             array(
                 'AttributeName' => 'Id',
-                'AttributeType' => 'S' 
+                'AttributeType' => 'S'
             ),
             array(
                 'AttributeName' => 'ReplyDateTime',
-                'AttributeType' => 'S' 
+                'AttributeType' => 'S'
             ),
             array(
                 'AttributeName' => 'PostedBy',
-                'AttributeType' => 'S' 
+                'AttributeType' => 'S'
             )
         ),
         'LocalSecondaryIndexes' => array(
@@ -139,7 +140,7 @@
         'KeySchema' => array(
             array(
                 'AttributeName' => 'Id',
-                'KeyType' => 'HASH' 
+                'KeyType' => 'HASH'
             ),
             array(
                 'AttributeName' => 'ReplyDateTime',
@@ -152,10 +153,10 @@
         )
     ));
     $tableNames[] = $tableName;
-    
+
     foreach($tableNames as $tableName) {
-        echo "Waiting for table $tableName to be created." . PHP_EOL;
+        echo "Waiting for table $tableName to be created." . HTML_EOL;
         $client->waitUntil('TableExists', array('TableName' => $tableName)); // Changed from v2
-        echo "Table $tableName has been created." . PHP_EOL;
+        echo "Table $tableName has been created." . HTML_EOL;
     }
 

@@ -1,4 +1,6 @@
 <?php
+    // Load common stuff
+    require_once('common.php');
 
     // Date now needs to be set, which I guess is a good thing!
     date_default_timezone_set('Europe/London');
@@ -11,10 +13,7 @@
     require '/var/www/html/vendor/autoload.php';
     use Aws\DynamoDb\DynamoDbClient;
 
-    $client = DynamoDbClient::factory(array(
-        'region' => 'eu-west-1',  // replace with your desired region
-        'version' => '2012-08-10' // Now needs a version
-    ));
+    $client = DynamoDbClient::factory($config);
 
     # Setup some local variables for dates
 
@@ -26,7 +25,7 @@
     $twentyOneDaysAgo = date('Y-m-d H:i:s', strtotime('-21 days'));
 
     $tableName = 'ProductCatalog';
-    echo "Adding data to the $tableName table..." . PHP_EOL;
+    echo "Adding data to the $tableName table..." . HTML_EOL;
 
     $response = $client->batchWriteItem(array(
         'RequestItems' => array(
@@ -155,12 +154,12 @@
         ),
     ));
 
-    echo "done." . PHP_EOL;
+    echo "done." . HTML_EOL;
 
 
 
     $tableName = 'Forum';
-    echo "Adding data to the $tableName table..." . PHP_EOL;
+    echo "Adding data to the $tableName table..." . HTML_EOL;
 
     $response = $client->batchWriteItem(array(
         'RequestItems' => array(
@@ -189,11 +188,11 @@
         )
     ));
 
-    echo "done." . PHP_EOL;
+    echo "done." . HTML_EOL;
 
 
     $tableName = 'Reply';
-    echo "Adding data to the $tableName table..." . PHP_EOL;
+    echo "Adding data to the $tableName table..." . HTML_EOL;
 
     $response = $client->batchWriteItem(array(
         'RequestItems' => array(
@@ -242,4 +241,4 @@
         )
     ));
 
-    echo "done." . PHP_EOL;
+    echo "done." . HTML_EOL;
