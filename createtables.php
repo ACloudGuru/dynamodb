@@ -37,7 +37,7 @@
             )
         ),
         'ProvisionedThroughput' => array(
-             'ReadCapacityUnits'    => 10,
+             'ReadCapacityUnits'  => 6,
              'WriteCapacityUnits' => 5
         )
     ));
@@ -61,7 +61,7 @@
             )
         ),
         'ProvisionedThroughput' => array(
-            'ReadCapacityUnits'    => 10,
+            'ReadCapacityUnits'  => 6,
             'WriteCapacityUnits' => 5
         )
     ));
@@ -93,7 +93,7 @@
             )
         ),
         'ProvisionedThroughput' => array(
-            'ReadCapacityUnits'    => 10,
+            'ReadCapacityUnits'  => 6,
             'WriteCapacityUnits' => 5
         )
     ));
@@ -147,7 +147,7 @@
             )
         ),
         'ProvisionedThroughput' => array(
-            'ReadCapacityUnits'    => 10,
+            'ReadCapacityUnits'  => 6,
             'WriteCapacityUnits' => 5
         )
     ));
@@ -158,3 +158,4 @@
         $client->waitUntil('TableExists', array('TableName' => $tableName)); // Changed from v2
         echo "Table $tableName has been created." . PHP_EOL;
     }
+
